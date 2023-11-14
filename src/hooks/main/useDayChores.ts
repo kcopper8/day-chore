@@ -1,19 +1,22 @@
-import { useState } from "react";
-import { v4 } from "uuid";
-import { Chore } from "../../type.ts";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { createDayChore, getDayChores } from "../../apis/choreApis.ts";
+import { queryClient } from "../../query.ts";
 
 const useDayChores = () => {
-  const [chores, setChores] = useState<Chore[]>([]);
-  return {
-    addChore: (props: Omit<Chore, "id" | "completed">) => {
-      setChores((prevState) => {
-        return [
-          { title: props.title, completed: false, id: v4() },
-          ...prevState,
-        ];
-      });
+  const { data } = useQuery({
+    queryKey: ["dayChores"],
+    queryFn: getDayChores,
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: createDayChore,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dayChores"] }).catch();
     },
-    dayChores: chores,
+  });
+  return {
+    addChore: mutate,
+    dayChores: data,
   };
 };
 

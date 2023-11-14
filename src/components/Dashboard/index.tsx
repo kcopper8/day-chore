@@ -31,13 +31,15 @@ const Dashboard = ({}: DashboardProps) => {
           <button type="submit">Add</button>
         </form>
       </div>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            <TodoItem todo={todo} onChange={() => {}} />
-          </li>
-        ))}
-      </ul>
+      {todos && (
+        <ul>
+          {todos.map((todo, index) => (
+            <li key={index}>
+              <TodoItem todo={todo} onChange={() => {}} />
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
