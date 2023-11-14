@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Todo } from "../../type.ts";
+import useDayChores from "../../hooks/main/useDayChores.ts";
 import TodoItem from "../TodoItem.tsx";
 
 type DashboardProps = {};
 
 const Dashboard = ({}: DashboardProps) => {
+  const { dayChores: todos, addChore } = useDayChores();
   const [todoText, setTodoText] = useState("");
-  const [todos, setTodos] = useState<Todo[]>([]);
   const handleAdd = () => {
-    setTodos((prevState) => {
-      return [{ title: todoText, completed: false }, ...prevState];
+    addChore({
+      title: todoText,
     });
     setTodoText("");
   };
