@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useDayChores from "../../hooks/main/useDayChores.ts";
-import TodoItem from "../TodoItem.tsx";
+import ChoreItem from "./ChoreItem.tsx";
 
 type DashboardProps = {};
 
@@ -35,7 +35,7 @@ const Dashboard = ({}: DashboardProps) => {
         <ul>
           {todos.map((todo, index) => (
             <li key={index}>
-              <TodoItem todo={todo} onChange={() => {}} />
+              <ChoreItem chore={todo} />
             </li>
           ))}
         </ul>
