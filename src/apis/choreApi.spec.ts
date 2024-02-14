@@ -1,21 +1,21 @@
 import { beforeEach, describe, expect, test } from "vitest";
+import { ApiContext } from "./apiContext.ts";
 import {
   createChore,
   deleteChore,
   getChores,
   setChoreCompleted,
-  setStorage,
 } from "./choreApis.ts";
 
 describe("choreApis", () => {
   beforeEach(() => {
-    setStorage({});
+    ApiContext.storage = {};
   });
 
   describe("createDayChore", () => {
     test("add new daychore", async () => {
       // given
-      setStorage({});
+      ApiContext.storage = {};
 
       // when
       await createChore({
@@ -37,7 +37,8 @@ describe("choreApis", () => {
   describe("setDayChoreCompleted", () => {
     test("removes", async () => {
       // given
-      setStorage({});
+      ApiContext.storage = {};
+
       await createChore({
         title: "test",
       });
@@ -62,7 +63,8 @@ describe("choreApis", () => {
   describe("deleteDayChore", () => {
     test("removes", async () => {
       // given
-      setStorage({});
+      ApiContext.storage = {};
+
       await createChore({
         title: "test",
       });
