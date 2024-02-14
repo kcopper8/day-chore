@@ -20,6 +20,9 @@ const useSimpleMutateForDayChore = <T>(
   return mutate;
 };
 
+/**
+ * 이날 할 일 관련 데이터 훅
+ */
 const useDayChores = () => {
   const { data } = useQuery({
     queryKey: ["dayChores"],

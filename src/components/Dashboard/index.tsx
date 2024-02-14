@@ -4,6 +4,9 @@ import ChoreItem from "./ChoreItem.tsx";
 
 type DashboardProps = {};
 
+/**
+ * Day Chore 전체 Dashboard
+ */
 const Dashboard = ({}: DashboardProps) => {
   const { dayChores: todos, addChore } = useDayChores();
   const [todoText, setTodoText] = useState("");
