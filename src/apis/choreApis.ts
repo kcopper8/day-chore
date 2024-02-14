@@ -10,7 +10,7 @@ export const setStorage = (s: IChoreStorage) => {
   storage = s;
 };
 
-export const getDayChores = (): Chore[] => {
+export const getChores = (): Chore[] => {
   try {
     return JSON.parse(storage.dayChores) || [];
   } catch {
@@ -22,10 +22,8 @@ const saveDayChores = (dayChores: Chore[]) => {
   storage.dayChores = JSON.stringify(dayChores);
 };
 
-export const createDayChore = async (
-  props: Omit<Chore, "id" | "completed">,
-) => {
-  const dayChores = getDayChores();
+export const createChore = async (props: Omit<Chore, "id" | "completed">) => {
+  const dayChores = getChores();
   saveDayChores([
     {
       id: v4(),
@@ -36,10 +34,10 @@ export const createDayChore = async (
   ]);
 };
 
-export const setDayChoreCompleted = async (
+export const setChoreCompleted = async (
   props: Pick<Chore, "id" | "completed">,
 ) => {
-  const dayChores = getDayChores();
+  const dayChores = getChores();
   const targetIndex = dayChores.findIndex(({ id }) => id === props.id);
   if (targetIndex < 0) {
     throw new Error("no dayChore: " + props.id);
@@ -49,8 +47,8 @@ export const setDayChoreCompleted = async (
   saveDayChores(dayChores);
 };
 
-export const deleteDayChore = async (id: Chore["id"]) => {
-  const dayChores = getDayChores();
+export const deleteChore = async (id: Chore["id"]) => {
+  const dayChores = getChores();
   const targetIndex = dayChores.findIndex(({ id: itemId }) => itemId === id);
   if (targetIndex < 0) {
     throw new Error("no dayChore: " + id);

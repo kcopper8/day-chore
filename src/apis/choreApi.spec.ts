@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, test } from "vitest";
 import {
-  createDayChore,
-  deleteDayChore,
-  getDayChores,
-  setDayChoreCompleted,
+  createChore,
+  deleteChore,
+  getChores,
+  setChoreCompleted,
   setStorage,
 } from "./choreApis.ts";
 
@@ -18,12 +18,12 @@ describe("choreApis", () => {
       setStorage({});
 
       // when
-      await createDayChore({
+      await createChore({
         title: "test",
       });
 
       // then
-      const chores = getDayChores();
+      const chores = getChores();
       expect(chores).toEqual([
         {
           completed: false,
@@ -38,19 +38,19 @@ describe("choreApis", () => {
     test("removes", async () => {
       // given
       setStorage({});
-      await createDayChore({
+      await createChore({
         title: "test",
       });
-      const [{ id }] = getDayChores();
+      const [{ id }] = getChores();
 
       // when
-      await setDayChoreCompleted({
+      await setChoreCompleted({
         id,
         completed: true,
       });
 
       // then
-      const chores = getDayChores();
+      const chores = getChores();
       expect(chores).toEqual([
         expect.objectContaining({
           completed: true,
@@ -63,16 +63,16 @@ describe("choreApis", () => {
     test("removes", async () => {
       // given
       setStorage({});
-      await createDayChore({
+      await createChore({
         title: "test",
       });
-      const [{ id }] = getDayChores();
+      const [{ id }] = getChores();
 
       // when
-      await deleteDayChore(id);
+      await deleteChore(id);
 
       // then
-      const chores = getDayChores();
+      const chores = getChores();
       expect(chores).toEqual([]);
     });
   });

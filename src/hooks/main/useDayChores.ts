@@ -1,9 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
-  createDayChore,
-  deleteDayChore,
-  getDayChores,
-  setDayChoreCompleted,
+  createChore,
+  deleteChore,
+  getChores,
+  setChoreCompleted,
 } from "../../apis/choreApis.ts";
 import { queryClient } from "../../query.ts";
 
@@ -26,23 +26,23 @@ const useSimpleMutateForDayChore = <T>(
 const useDayChores = () => {
   const { data } = useQuery({
     queryKey: ["dayChores"],
-    queryFn: getDayChores,
+    queryFn: getChores,
   });
 
-  const addChore = useSimpleMutateForDayChore(createDayChore);
-  const setChoreCompleted = useSimpleMutateForDayChore(setDayChoreCompleted);
-  const deleteChore = useSimpleMutateForDayChore(deleteDayChore);
+  const addChore = useSimpleMutateForDayChore(createChore);
+  const handleSetChoreCompleted = useSimpleMutateForDayChore(setChoreCompleted);
+  const handleDeleteChore = useSimpleMutateForDayChore(deleteChore);
 
   useMutation({
-    mutationFn: setDayChoreCompleted,
+    mutationFn: setChoreCompleted,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["dayChores"] }).catch();
     },
   });
   return {
     addChore,
-    setChoreCompleted,
-    deleteChore,
+    setChoreCompleted: handleSetChoreCompleted,
+    deleteChore: handleDeleteChore,
     dayChores: data,
   };
 };
