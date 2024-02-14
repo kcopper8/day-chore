@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { createChore, deleteChore } from "../../apis/choreApis.ts";
 import { getDayChores, setDayChoreCompleted } from "../../apis/dayChoreApi.ts";
 import { queryClient } from "../../query.ts";
-import { DayChore } from "../../type.ts";
+import { ChoreDate, DayChore } from "../../type.ts";
 
 const useSimpleMutateForDayChore = <T>(
   mutationFn: (prop: T) => Promise<void>,
@@ -17,11 +17,18 @@ const useSimpleMutateForDayChore = <T>(
   return mutate;
 };
 
+const getToday = (): ChoreDate => {
+  return <`${string}-${string}-${string}`>(
+    new Date().toDateString().split("T")[0]
+  );
+};
+
 /**
  * 이날 할 일 관련 데이터 훅
  */
 const useDayChores = () => {
-  const date = "2024-02-14";
+  const date = getToday();
+
   const { data } = useQuery({
     queryKey: ["dayChores"],
     queryFn: () => getDayChores(date),
