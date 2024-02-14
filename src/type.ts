@@ -1,10 +1,11 @@
-export type Todo = {
-  completed: boolean;
-  title: string;
-};
-
 export type Chore = {
-  completed: boolean;
   title: string;
   id: string;
 };
+
+export type DayChore = {
+  completed: boolean;
+  date: ChoreDate;
+} & Chore;
+
+export type ChoreDate = `${string}-${string}-${string}`;

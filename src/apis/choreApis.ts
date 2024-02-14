@@ -20,23 +20,9 @@ export const createChore = async (props: Omit<Chore, "id" | "completed">) => {
     {
       id: v4(),
       title: props.title,
-      completed: false,
     },
     ...dayChores,
   ]);
-};
-
-export const setChoreCompleted = async (
-  props: Pick<Chore, "id" | "completed">,
-) => {
-  const dayChores = getChores();
-  const targetIndex = dayChores.findIndex(({ id }) => id === props.id);
-  if (targetIndex < 0) {
-    throw new Error("no dayChore: " + props.id);
-  }
-
-  dayChores[targetIndex].completed = props.completed;
-  saveDayChores(dayChores);
 };
 
 export const deleteChore = async (id: Chore["id"]) => {

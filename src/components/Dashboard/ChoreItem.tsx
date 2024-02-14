@@ -1,8 +1,8 @@
 import useDayChores from "../../hooks/main/useDayChores.ts";
-import { Chore } from "../../type.ts";
+import { DayChore } from "../../type.ts";
 
 type TodoItemProps = {
-  chore: Chore;
+  chore: DayChore;
 };
 
 const ChoreItem = ({ chore }: TodoItemProps) => {

@@ -1,11 +1,6 @@
 import { beforeEach, describe, expect, test } from "vitest";
 import { ApiContext } from "./apiContext.ts";
-import {
-  createChore,
-  deleteChore,
-  getChores,
-  setChoreCompleted,
-} from "./choreApis.ts";
+import { createChore, deleteChore, getChores } from "./choreApis.ts";
 
 describe("choreApis", () => {
   beforeEach(() => {
@@ -26,36 +21,9 @@ describe("choreApis", () => {
       const chores = getChores();
       expect(chores).toEqual([
         {
-          completed: false,
           id: expect.any(String),
           title: "test",
         },
-      ]);
-    });
-  });
-
-  describe("setDayChoreCompleted", () => {
-    test("removes", async () => {
-      // given
-      ApiContext.storage = {};
-
-      await createChore({
-        title: "test",
-      });
-      const [{ id }] = getChores();
-
-      // when
-      await setChoreCompleted({
-        id,
-        completed: true,
-      });
-
-      // then
-      const chores = getChores();
-      expect(chores).toEqual([
-        expect.objectContaining({
-          completed: true,
-        }),
       ]);
     });
   });
