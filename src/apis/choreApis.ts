@@ -1,16 +1,25 @@
 import { v4 } from "uuid";
 import { Chore } from "../type.ts";
 
+type IChoreStorage = {
+  [name: string]: any;
+};
+
+let storage: IChoreStorage = globalThis.localStorage;
+export const setStorage = (s: IChoreStorage) => {
+  storage = s;
+};
+
 export const getDayChores = (): Chore[] => {
   try {
-    return JSON.parse(localStorage.dayChores) || [];
+    return JSON.parse(storage.dayChores) || [];
   } catch {
     return [];
   }
 };
 
 const saveDayChores = (dayChores: Chore[]) => {
-  localStorage.dayChores = JSON.stringify(dayChores);
+  storage.dayChores = JSON.stringify(dayChores);
 };
 
 export const createDayChore = async (
