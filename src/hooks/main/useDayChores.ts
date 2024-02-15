@@ -19,7 +19,7 @@ const useSimpleMutateForDayChore = <T>(
 
 const getToday = (): ChoreDate => {
   return <`${string}-${string}-${string}`>(
-    new Date().toDateString().split("T")[0]
+    new Date().toISOString().split("T")[0]
   );
 };
 
@@ -32,6 +32,7 @@ const useDayChores = () => {
   const { data } = useQuery({
     queryKey: ["dayChores"],
     queryFn: () => getDayChores(date),
+    throwOnError: true,
   });
 
   const addChore = useSimpleMutateForDayChore(createChore);

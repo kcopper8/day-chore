@@ -1,4 +1,4 @@
-import { ChoreDate, DayChore } from "../type.ts";
+import { ChoreDate, DayChore, isChoreDate } from "../type.ts";
 import { ApiContext } from "./apiContext.ts";
 import { getChores } from "./choreApis.ts";
 
@@ -35,6 +35,9 @@ const getDayVal = (date: ChoreDate) => {
 };
 
 export const getDayChores = (date: ChoreDate): DayChore[] => {
+  if (!isChoreDate(date)) {
+    throw new Error("invalid chore date");
+  }
   const dayVal = getDayVal(date);
 
   return getChores().map((chore) => ({
