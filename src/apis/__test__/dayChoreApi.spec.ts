@@ -1,17 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { ApiContext } from "./apiContext.ts";
-import { createChore } from "./choreApis.ts";
-import { getDayChores, setDayChoreCompleted } from "./dayChoreApi.ts";
+import { getDayChores, setDayChoreCompleted } from "../dayChoreApi.ts";
+import { prepareOneChoreStorage } from "./fixture.ts";
 
 describe("dayChoreApi", () => {
   describe("getDayChores", () => {
     it("returns chores with calling date", async () => {
       // given : createChore 로 1개의 chore 가 생김
-      ApiContext.storage = {};
-
-      await createChore({
-        title: "test",
-      });
+      await prepareOneChoreStorage();
 
       // when
       const dayChores = getDayChores("2024-02-14");
@@ -30,15 +25,10 @@ describe("dayChoreApi", () => {
   describe("setDayChoreCompleted", () => {
     it("dayChoreCompleted", async () => {
       // given : createChore 로 1개의 chore 가 생김
-      ApiContext.storage = {};
-
-      await createChore({
-        title: "test",
-      });
+      const [{ id }] = await prepareOneChoreStorage();
 
       // when
-      const [{ id }] = getDayChores("2024-02-14");
-      setDayChoreCompleted({
+      await setDayChoreCompleted({
         id,
         date: "2024-02-14",
         completed: true,

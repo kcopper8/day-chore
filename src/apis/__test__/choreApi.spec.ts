@@ -1,16 +1,12 @@
-import { beforeEach, describe, expect, test } from "vitest";
-import { ApiContext } from "./apiContext.ts";
-import { createChore, deleteChore, getChores } from "./choreApis.ts";
+import { describe, expect, test } from "vitest";
+import { createChore, deleteChore, getChores } from "../choreApis.ts";
+import { prepareClearStorage, prepareOneChoreStorage } from "./fixture.ts";
 
 describe("choreApis", () => {
-  beforeEach(() => {
-    ApiContext.storage = {};
-  });
-
   describe("createDayChore", () => {
     test("add new daychore", async () => {
       // given
-      ApiContext.storage = {};
+      await prepareClearStorage();
 
       // when
       await createChore({
@@ -31,12 +27,7 @@ describe("choreApis", () => {
   describe("deleteDayChore", () => {
     test("removes", async () => {
       // given
-      ApiContext.storage = {};
-
-      await createChore({
-        title: "test",
-      });
-      const [{ id }] = getChores();
+      const [{ id }] = await prepareOneChoreStorage();
 
       // when
       await deleteChore(id);
