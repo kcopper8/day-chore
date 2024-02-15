@@ -6,7 +6,7 @@ type TodoItemProps = {
 };
 
 const DayChoreItem = ({ chore }: TodoItemProps) => {
-  const { setChoreCompleted, deleteChore } = useDayChores(chore.date);
+  const { setChoreCompleted } = useDayChores(chore.date);
   return (
     <>
       <label>
@@ -22,7 +22,6 @@ const DayChoreItem = ({ chore }: TodoItemProps) => {
         />{" "}
         {chore.title}
       </label>{" "}
-      <button onClick={() => deleteChore(chore.id)}>X</button>
     </>
   );
 };

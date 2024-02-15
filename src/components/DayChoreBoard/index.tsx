@@ -1,6 +1,6 @@
 import useDayChores from "../../hooks/main/useDayChores.ts";
 import { ChoreDate } from "../../type.ts";
-import DayChoreItem from "../Dashboard/DayChoreItem.tsx";
+import DayChoreItem from "./DayChoreItem.tsx";
 
 type DayChoreBoardProps = {
   date: ChoreDate;

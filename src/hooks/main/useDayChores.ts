@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { createChore, deleteChore } from "../../apis/choreApis.ts";
 import { getDayChores, setDayChoreCompleted } from "../../apis/dayChoreApi.ts";
 import { ChoreDate, DayChore } from "../../type.ts";
 import useSimpleMutate from "../util/useSimpleMutate.ts";
@@ -15,7 +14,6 @@ const useDayChores = (date: ChoreDate) => {
     throwOnError: true,
   });
 
-  const addChore = useSimpleMutate(createChore, [QueryPrefix.DAY_CHORES]);
   const handleSetChoreCompleted = useSimpleMutate(
     (props: Pick<DayChore, "id" | "completed">) =>
       setDayChoreCompleted({
@@ -24,14 +22,9 @@ const useDayChores = (date: ChoreDate) => {
       }),
     [QueryPrefix.DAY_CHORES],
   );
-  const handleDeleteChore = useSimpleMutate(deleteChore, [
-    QueryPrefix.DAY_CHORES,
-  ]);
 
   return {
-    addChore,
     setChoreCompleted: handleSetChoreCompleted,
-    deleteChore: handleDeleteChore,
     dayChores: data,
   };
 };
