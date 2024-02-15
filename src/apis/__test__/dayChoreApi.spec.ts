@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { getDayChores, setDayChoreCompleted } from "../dayChoreApi.ts";
-import { prepareOneChoreStorage } from "./fixture.ts";
+import {
+  getChoreDateList,
+  getDayChores,
+  setDayChoreCompleted,
+} from "../dayChoreApi.ts";
+import { prepareClearStorage, prepareOneChoreStorage } from "./fixture.ts";
 
 describe("dayChoreApi", () => {
   describe("getDayChores", () => {
@@ -43,6 +47,20 @@ describe("dayChoreApi", () => {
           completed: true,
         }),
       ]);
+    });
+  });
+
+  describe("getChoreDateList", () => {
+    it("returns todays choreDate after getDayChores", async () => {
+      // given
+      await prepareClearStorage();
+      getDayChores("2024-02-14");
+
+      // when
+      const choreDateList = getChoreDateList();
+
+      // then
+      expect(choreDateList).toEqual(["2024-02-14"]);
     });
   });
 });
