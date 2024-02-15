@@ -4,7 +4,7 @@ import { QueryPrefix } from "./queries.ts";
 
 const useChoreDates = () => {
   const { data: choreDateList } = useQuery({
-    queryKey: [QueryPrefix.CHORE_DATE_LIST],
+    queryKey: QueryPrefix.CHORE_DATE_LIST,
     queryFn: getChoreDateList,
   });
 

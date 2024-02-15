@@ -9,7 +9,7 @@ import { QueryPrefix } from "./queries.ts";
  */
 const useDayChores = (date: ChoreDate) => {
   const { data } = useQuery({
-    queryKey: [QueryPrefix.DAY_CHORES, date],
+    queryKey: QueryPrefix.DAY_CHORES(date),
     queryFn: () => getDayChores(date),
     throwOnError: true,
   });
@@ -20,7 +20,7 @@ const useDayChores = (date: ChoreDate) => {
         ...props,
         date,
       }),
-    [QueryPrefix.DAY_CHORES],
+    QueryPrefix.DAY_CHORES(date),
   );
 
   return {
