@@ -6,7 +6,8 @@ const GlobalLayout = ({}: GlobalLayoutProps) => {
   return (
     <>
       <header>
-        <NavLink to={"/"}>Today</NavLink>
+        <NavLink to={"/"}>Today</NavLink> |{" "}
+        <NavLink to={"/archive"}>Archive</NavLink>
       </header>
       <Outlet />
     </>

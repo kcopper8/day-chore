@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 import GlobalLayout from "./components/GlobalLayout";
+import ArchivePage from "./pages/ArchivePage.tsx";
 import { queryClient } from "./query.ts";
 
 const router = createBrowserRouter(
@@ -13,6 +14,10 @@ const router = createBrowserRouter(
         {
           path: "/",
           element: <Dashboard />,
+        },
+        {
+          path: "/archive",
+          element: <ArchivePage />,
         },
       ],
     },
