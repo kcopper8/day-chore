@@ -1,3 +1,4 @@
+import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import useChores from "../../hooks/main/useChores.ts";
 
@@ -14,19 +15,22 @@ const ChoreCreation = ({}: ChoreCreationProps) => {
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleAdd();
-      }}
-    >
-      <input
-        type="text"
-        value={todoText}
-        onChange={(e) => setTodoText(e.target.value)}
-      />
-      <button type="submit">Add</button>
-    </form>
+    <Box>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleAdd();
+        }}
+      >
+        <TextField
+          label={"title"}
+          variant="standard"
+          value={todoText}
+          onChange={(e) => setTodoText(e.target.value)}
+        />
+        <Button type="submit">Add</Button>
+      </form>
+    </Box>
   );
 };
 

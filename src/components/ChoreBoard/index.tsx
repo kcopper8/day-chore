@@ -1,3 +1,4 @@
+import { List, Typography } from "@mui/material";
 import useChores from "../../hooks/main/useChores.ts";
 import ChoreCreation from "../ChoreCreation";
 import ChoreItem from "./ChoreItem.tsx";
@@ -9,18 +10,16 @@ const ChoreBoard = ({}: ChoreBoardProps) => {
 
   return (
     <>
-      <h2>chore board</h2>
+      <Typography variant="h3">chore board</Typography>
       <div>
         <ChoreCreation />
       </div>
       {chores && (
-        <ul>
-          {chores.map((todo, index) => (
-            <li key={index}>
-              <ChoreItem chore={todo} />
-            </li>
+        <List>
+          {chores.map((todo) => (
+            <ChoreItem key={todo.id} chore={todo} />
           ))}
-        </ul>
+        </List>
       )}
     </>
   );

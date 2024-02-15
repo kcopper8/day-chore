@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, List, ListItem } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import useChoreDates from "../hooks/main/useChoreDates.ts";
 
 type ArchivePageProps = {};
@@ -9,13 +10,15 @@ const ArchivePage = ({}: ArchivePageProps) => {
     return <p>no data</p>;
   }
   return (
-    <ul>
+    <List>
       {choreDateList.map((choreDate) => (
-        <li key={choreDate}>
-          <Link to={`/archive/${choreDate}`}>{choreDate}</Link>
-        </li>
+        <ListItem key={choreDate}>
+          <Link component={RouterLink} to={`/archive/${choreDate}`}>
+            {choreDate}
+          </Link>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };
 

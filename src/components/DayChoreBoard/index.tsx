@@ -1,3 +1,4 @@
+import { List, Typography } from "@mui/material";
 import useDayChores from "../../hooks/main/useDayChores.ts";
 import { ChoreDate } from "../../type.ts";
 import DayChoreItem from "./DayChoreItem.tsx";
@@ -10,16 +11,14 @@ const DayChoreBoard = ({ date }: DayChoreBoardProps) => {
   const { dayChores: todos } = useDayChores(date);
   return (
     <>
-      <h2>{date}</h2>
+      <Typography variant="h3">{date}</Typography>
 
       {todos && (
-        <ul>
+        <List>
           {todos.map((todo, index) => (
-            <li key={index}>
-              <DayChoreItem chore={todo} />
-            </li>
+            <DayChoreItem key={index} chore={todo} />
           ))}
-        </ul>
+        </List>
       )}
     </>
   );
