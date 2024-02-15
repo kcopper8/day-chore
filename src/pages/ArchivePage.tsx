@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useChoreDates from "../hooks/main/useChoreDates.ts";
 
 type ArchivePageProps = {};
@@ -10,7 +11,9 @@ const ArchivePage = ({}: ArchivePageProps) => {
   return (
     <ul>
       {choreDateList.map((choreDate) => (
-        <li key={choreDate}>{choreDate}</li>
+        <li key={choreDate}>
+          <Link to={`/archive/${choreDate}`}>{choreDate}</Link>
+        </li>
       ))}
     </ul>
   );
