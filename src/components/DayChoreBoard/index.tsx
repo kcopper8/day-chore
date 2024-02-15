@@ -7,7 +7,7 @@ type DayChoreBoardProps = {
 };
 
 const DayChoreBoard = ({ date }: DayChoreBoardProps) => {
-  const { dayChores: todos } = useDayChores();
+  const { dayChores: todos } = useDayChores(date);
   return (
     <>
       <h2>${date}</h2>

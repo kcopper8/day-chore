@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getChoreDateOfToday } from "../../helpers/choreDate.ts";
 import useDayChores from "../../hooks/main/useDayChores.ts";
 import ChoreItem from "./ChoreItem.tsx";
 
@@ -8,7 +9,7 @@ type DashboardProps = {};
  * Day Chore 전체 Dashboard
  */
 const Dashboard = ({}: DashboardProps) => {
-  const { dayChores: todos, addChore } = useDayChores();
+  const { dayChores: todos, addChore } = useDayChores(getChoreDateOfToday());
   const [todoText, setTodoText] = useState("");
   const handleAdd = () => {
     addChore({

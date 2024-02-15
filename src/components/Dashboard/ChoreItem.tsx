@@ -6,7 +6,7 @@ type TodoItemProps = {
 };
 
 const ChoreItem = ({ chore }: TodoItemProps) => {
-  const { setChoreCompleted, deleteChore } = useDayChores();
+  const { setChoreCompleted, deleteChore } = useDayChores(chore.date);
   return (
     <>
       <label>
