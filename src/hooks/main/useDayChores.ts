@@ -1,7 +1,6 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { createChore, deleteChore } from "../../apis/choreApis.ts";
 import { getDayChores, setDayChoreCompleted } from "../../apis/dayChoreApi.ts";
-import { queryClient } from "../../query.ts";
 import { ChoreDate, DayChore } from "../../type.ts";
 import useSimpleMutate from "../util/useSimpleMutate.ts";
 import { QueryPrefix } from "./queries.ts";
@@ -29,12 +28,6 @@ const useDayChores = (date: ChoreDate) => {
     QueryPrefix.DAY_CHORES,
   ]);
 
-  useMutation({
-    mutationFn: setDayChoreCompleted,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["dayChores"] }).catch();
-    },
-  });
   return {
     addChore,
     setChoreCompleted: handleSetChoreCompleted,
