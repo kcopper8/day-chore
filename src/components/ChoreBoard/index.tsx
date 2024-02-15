@@ -1,15 +1,11 @@
 import { useState } from "react";
-import { getChoreDateOfToday } from "../../helpers/choreDate.ts";
-import useDayChores from "../../hooks/main/useDayChores.ts";
+import useChores from "../../hooks/main/useChores.ts";
 import ChoreItem from "./ChoreItem.tsx";
 
-type DashboardProps = {};
+type ChoreBoardProps = {};
 
-/**
- * Day Chore 전체 Dashboard
- */
-const Dashboard = ({}: DashboardProps) => {
-  const { dayChores: todos, addChore } = useDayChores(getChoreDateOfToday());
+const ChoreBoard = ({}: ChoreBoardProps) => {
+  const { chores, addChore } = useChores();
   const [todoText, setTodoText] = useState("");
   const handleAdd = () => {
     addChore({
@@ -19,7 +15,7 @@ const Dashboard = ({}: DashboardProps) => {
   };
   return (
     <>
-      <h1>Dashboard</h1>
+      <h2>chore board</h2>
       <div>
         <form
           onSubmit={(e) => {
@@ -35,9 +31,9 @@ const Dashboard = ({}: DashboardProps) => {
           <button type="submit">Add</button>
         </form>
       </div>
-      {todos && (
+      {chores && (
         <ul>
-          {todos.map((todo, index) => (
+          {chores.map((todo, index) => (
             <li key={index}>
               <ChoreItem chore={todo} />
             </li>
@@ -48,4 +44,4 @@ const Dashboard = ({}: DashboardProps) => {
   );
 };
 
-export default Dashboard;
+export default ChoreBoard;

@@ -4,6 +4,7 @@ import "./App.css";
 import GlobalLayout from "./components/GlobalLayout";
 import ArchiveDayChorePage from "./pages/ArchiveDayChorePage.tsx";
 import ArchivePage from "./pages/ArchivePage.tsx";
+import ChoreBoardPage from "./pages/ChoreBoardPage.tsx";
 import TodayChorePage from "./pages/TodayChorePage.tsx";
 import { queryClient } from "./query.ts";
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter(
         {
           path: "/archive/:date",
           element: <ArchiveDayChorePage />,
+        },
+        {
+          path: "/chore",
+          element: <ChoreBoardPage />,
         },
       ],
     },

@@ -5,7 +5,7 @@ type TodoItemProps = {
   chore: DayChore;
 };
 
-const ChoreItem = ({ chore }: TodoItemProps) => {
+const DayChoreItem = ({ chore }: TodoItemProps) => {
   const { setChoreCompleted, deleteChore } = useDayChores(chore.date);
   return (
     <>
@@ -27,4 +27,4 @@ const ChoreItem = ({ chore }: TodoItemProps) => {
   );
 };
 
-export default ChoreItem;
+export default DayChoreItem;
