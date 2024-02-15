@@ -1,5 +1,6 @@
 # Day Chore
 - https://kcopper8.github.io/day-chore/
+- use [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)
 
 # React + TypeScript + Vite
 
