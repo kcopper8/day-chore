@@ -3,22 +3,8 @@ import { createChore, deleteChore } from "../../apis/choreApis.ts";
 import { getDayChores, setDayChoreCompleted } from "../../apis/dayChoreApi.ts";
 import { queryClient } from "../../query.ts";
 import { ChoreDate, DayChore } from "../../type.ts";
+import useSimpleMutate from "../util/useSimpleMutate.ts";
 import { QueryPrefix } from "./queries.ts";
-
-const useSimpleMutateForDayChore = <T>(
-  mutationFn: (prop: T) => Promise<void>,
-) => {
-  const { mutate } = useMutation({
-    mutationFn: mutationFn,
-    onSuccess: () => {
-      queryClient
-        .invalidateQueries({ queryKey: [QueryPrefix.DAY_CHORES] })
-        .catch();
-    },
-  });
-
-  return mutate;
-};
 
 /**
  * 이날 할 일 관련 데이터 훅
@@ -30,15 +16,18 @@ const useDayChores = (date: ChoreDate) => {
     throwOnError: true,
   });
 
-  const addChore = useSimpleMutateForDayChore(createChore);
-  const handleSetChoreCompleted = useSimpleMutateForDayChore(
+  const addChore = useSimpleMutate(createChore, [QueryPrefix.DAY_CHORES]);
+  const handleSetChoreCompleted = useSimpleMutate(
     (props: Pick<DayChore, "id" | "completed">) =>
       setDayChoreCompleted({
         ...props,
         date,
       }),
+    [QueryPrefix.DAY_CHORES],
   );
-  const handleDeleteChore = useSimpleMutateForDayChore(deleteChore);
+  const handleDeleteChore = useSimpleMutate(deleteChore, [
+    QueryPrefix.DAY_CHORES,
+  ]);
 
   useMutation({
     mutationFn: setDayChoreCompleted,
