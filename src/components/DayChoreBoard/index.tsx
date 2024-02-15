@@ -10,7 +10,7 @@ const DayChoreBoard = ({ date }: DayChoreBoardProps) => {
   const { dayChores: todos } = useDayChores(date);
   return (
     <>
-      <h2>${date}</h2>
+      <h2>{date}</h2>
 
       {todos && (
         <ul>
