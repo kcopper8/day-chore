@@ -20,7 +20,7 @@ const GlobalLayout = ({}: GlobalLayoutProps) => {
   return (
     <>
       <header>
-        <HeaderLink to={"/"}>Toay</HeaderLink> |{" "}
+        <HeaderLink to={"/"}>Today</HeaderLink> |{" "}
         <HeaderLink to={"/archive"}>Archive</HeaderLink> |{" "}
         <HeaderLink to={"/chore"}>Chore</HeaderLink>
       </header>
