@@ -5,6 +5,7 @@ import GlobalLayout from "./components/GlobalLayout";
 import ArchiveDayChorePage from "./pages/ArchiveDayChorePage.tsx";
 import ArchivePage from "./pages/ArchivePage.tsx";
 import ChoreBoardPage from "./pages/ChoreBoardPage.tsx";
+import EditChorePage from "./pages/EditChorePage.tsx";
 import TodayChorePage from "./pages/TodayChorePage.tsx";
 import { queryClient } from "./query.ts";
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter(
         {
           path: "/chore",
           element: <ChoreBoardPage />,
+        },
+        {
+          path: "/chore/:id",
+          element: <EditChorePage />,
         },
       ],
     },

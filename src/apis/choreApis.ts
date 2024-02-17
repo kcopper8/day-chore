@@ -35,3 +35,14 @@ export const deleteChore = async (id: Chore["id"]) => {
   dayChores.splice(targetIndex, 1);
   saveDayChores(dayChores);
 };
+
+export const modifyChore = async (chore: Chore) => {
+  const chores = getChores();
+  const targetIndex = chores.findIndex(({ id: itemId }) => itemId === chore.id);
+  if (targetIndex < 0) {
+    throw new Error("no dayChore: " + chore.id);
+  }
+
+  chores[targetIndex] = chore;
+  saveDayChores(chores);
+};

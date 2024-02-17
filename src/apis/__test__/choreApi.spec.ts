@@ -1,5 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { createChore, deleteChore, getChores } from "../choreApis.ts";
+import {
+  createChore,
+  deleteChore,
+  getChores,
+  modifyChore,
+} from "../choreApis.ts";
 import { prepareClearStorage, prepareOneChoreStorage } from "./fixture.ts";
 
 describe("choreApis", () => {
@@ -35,6 +40,27 @@ describe("choreApis", () => {
       // then
       const chores = getChores();
       expect(chores).toEqual([]);
+    });
+  });
+
+  describe("modifyChore", () => {
+    test("replaces new props", async () => {
+      // given
+      const [{ id }] = await prepareOneChoreStorage();
+
+      // when
+      await modifyChore({
+        id,
+        title: "test2",
+      });
+
+      // then
+      expect(getChores()).toEqual([
+        {
+          id,
+          title: "test2",
+        },
+      ]);
     });
   });
 });
