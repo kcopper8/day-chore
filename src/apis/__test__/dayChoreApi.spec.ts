@@ -45,6 +45,7 @@ describe("dayChoreApi", () => {
           id,
           date: "2024-02-14",
           completed: true,
+          completedAt: expect.any(Number),
         }),
       ]);
     });

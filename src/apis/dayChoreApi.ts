@@ -1,4 +1,4 @@
-import { ChoreDate, DayChore, isChoreDate } from "../type.ts";
+import { Chore, ChoreDate, DayChore, isChoreDate } from "../type.ts";
 import { ApiContext } from "./apiContext.ts";
 import { getChores } from "./choreApis.ts";
 
@@ -18,7 +18,11 @@ const getChoreDateListFromStore = () => {
   }
 };
 
-const getDayVal = (date: ChoreDate) => {
+type DayChoreVal = {
+  completed: boolean;
+  completedAt?: number;
+};
+const getDayVal = (date: ChoreDate): Record<Chore["id"], DayChoreVal> => {
   const choreDateList = getChoreDateListFromStore();
 
   const choreDateSet = new Set(choreDateList);
@@ -40,18 +44,32 @@ export const getDayChores = (date: ChoreDate): DayChore[] => {
   }
   const dayVal = getDayVal(date);
 
-  return getChores().map((chore) => ({
-    ...chore,
-    date,
-    completed: !!dayVal[chore.id],
-  }));
+  return getChores().map((chore) => {
+    const dayChoreVal: DayChoreVal | undefined = dayVal[chore.id];
+    const dayChore = {
+      ...chore,
+      date,
+      completed: dayChoreVal ? dayChoreVal.completed : false,
+    } as DayChore;
+    if (dayChoreVal && dayChoreVal.completedAt) {
+      dayChore["completedAt"] = dayChoreVal.completedAt;
+    }
+
+    return dayChore;
+  });
 };
 
 export const setDayChoreCompleted = async (
   props: Pick<DayChore, "id" | "completed" | "date">,
 ) => {
   const dayVal = getDayVal(props.date);
-  dayVal[props.id] = props.completed;
+  dayVal[props.id] = {
+    completed: props.completed,
+  };
+
+  if (props.completed) {
+    dayVal[props.id].completedAt = Date.now();
+  }
 
   ApiContext.storage[`chore-${props.date}`] = JSON.stringify(dayVal);
 };

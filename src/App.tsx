@@ -1,6 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ApiServiceProvider from "./components/ApiServiceProvider";
 import GlobalLayout from "./components/GlobalLayout";
 import ArchiveDayChorePage from "./pages/ArchiveDayChorePage.tsx";
 import ArchivePage from "./pages/ArchivePage.tsx";
@@ -46,9 +47,11 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <ApiServiceProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </ApiServiceProvider>
     </>
   );
 }

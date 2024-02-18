@@ -6,6 +6,7 @@ export type Chore = {
 export type DayChore = {
   completed: boolean;
   date: ChoreDate;
+  completedAt?: number;
 } & Chore;
 
 export type ChoreDate = `${string}-${string}-${string}`;
