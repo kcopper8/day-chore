@@ -4,6 +4,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { format } from "date-fns/format";
 import useDayChores from "../../hooks/main/useDayChores.ts";
 import { DayChore } from "../../type.ts";
 
@@ -24,7 +25,10 @@ const DayChoreItem = ({ chore }: TodoItemProps) => {
       <ListItemIcon>
         <Checkbox checked={chore.completed} />
       </ListItemIcon>
-      <ListItemText primary={chore.title} />
+      <ListItemText
+        primary={chore.title}
+        secondary={chore.completedAt && format(chore.completedAt, "h:m aaa")}
+      />
     </ListItemButton>
   );
 };
