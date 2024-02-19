@@ -10,7 +10,7 @@ import { getChores } from "./choreApis.ts";
 'choreDateList' : ['2024-02-15', '2024-02-16',...]
  */
 
-const getChoreDateListFromStore = () => {
+export const getChoreDateListFromStore = () => {
   try {
     return JSON.parse(ApiContext.storage.choreDateList);
   } catch {

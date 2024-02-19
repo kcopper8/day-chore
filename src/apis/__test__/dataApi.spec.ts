@@ -4,6 +4,20 @@ import { initialize } from "../dataApi.ts";
 import { prepareClearStorage } from "./fixture.ts";
 
 describe("initialize", () => {
+  describe("without data", () => {
+    test("do nothing", async () => {
+      // given
+      await prepareClearStorage();
+
+      // when
+      await initialize();
+
+      // then
+      expect(ApiContext.storage).toEqual({
+        version: "0.0.1",
+      });
+    });
+  });
   describe("migration to 0.0.1", () => {
     test("", async () => {
       // given

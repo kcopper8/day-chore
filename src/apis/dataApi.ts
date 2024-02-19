@@ -1,11 +1,12 @@
 import { ApiContext } from "./apiContext.ts";
+import { getChoreDateListFromStore } from "./dayChoreApi.ts";
 
 const getStorageVersion = () => {
   return ApiContext.storage.version;
 };
 
 const migrateTo001 = () => {
-  const choreDateList = JSON.parse(ApiContext.storage.choreDateList);
+  const choreDateList = getChoreDateListFromStore();
   choreDateList.forEach((choreDate: string) => {
     const dayChoreMapData = ApiContext.storage[`chore-${choreDate}`];
     if (!dayChoreMapData) {
