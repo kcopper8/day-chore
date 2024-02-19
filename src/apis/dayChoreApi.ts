@@ -59,19 +59,29 @@ export const getDayChores = (date: ChoreDate): DayChore[] => {
   });
 };
 
-export const setDayChoreCompleted = async (
-  props: Pick<DayChore, "id" | "completed" | "date">,
-) => {
-  const dayVal = getDayVal(props.date);
-  dayVal[props.id] = {
-    completed: props.completed,
+type UpdateProps = {
+  key: Pick<DayChore, "id" | "date">;
+  propsToUpdate: DayChoreVal;
+};
+export const updateDayChoreProps = async ({
+  key: { id, date },
+  propsToUpdate,
+}: UpdateProps) => {
+  const dayVal = getDayVal(date);
+
+  const dayChoreVal = dayVal[id] || {
+    completed: false,
   };
 
-  if (props.completed) {
-    dayVal[props.id].completedAt = Date.now();
+  dayChoreVal.completed = propsToUpdate.completed;
+
+  if (propsToUpdate.completedAt) {
+    dayChoreVal.completedAt = propsToUpdate.completedAt;
   }
 
-  ApiContext.storage[`chore-${props.date}`] = JSON.stringify(dayVal);
+  dayVal[id] = dayChoreVal;
+
+  ApiContext.storage[`chore-${date}`] = JSON.stringify(dayVal);
 };
 
 export const getChoreDateList = (): ChoreDate[] => {

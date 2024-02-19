@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   getChoreDateList,
   getDayChores,
-  setDayChoreCompleted,
+  updateDayChoreProps,
 } from "../dayChoreApi.ts";
 import { prepareClearStorage, prepareOneChoreStorage } from "./fixture.ts";
 
@@ -26,16 +26,21 @@ describe("dayChoreApi", () => {
     });
   });
 
-  describe("setDayChoreCompleted", () => {
+  describe("updateDayChoreProps", () => {
     it("dayChoreCompleted", async () => {
       // given : createChore 로 1개의 chore 가 생김
       const [{ id }] = await prepareOneChoreStorage();
 
       // when
-      await setDayChoreCompleted({
-        id,
-        date: "2024-02-14",
-        completed: true,
+      await updateDayChoreProps({
+        key: {
+          id,
+          date: "2024-02-14",
+        },
+        propsToUpdate: {
+          completed: true,
+          completedAt: Date.now(),
+        },
       });
 
       // then
